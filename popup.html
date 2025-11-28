@@ -1,24 +1,82 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <meta charset="UTF-8">
     <title>VarejoFacilTools</title>
-    <style>
-        body {
-            width: 200px;
-            padding: 10px;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            font-size: 16px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="popup.css">
 </head>
-
 <body>
+    <div class="header">
+        <div class="logo">VarejoFacil Tools</div>
+        <div class="status">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Verificando...</span>
+        </div>
+    </div>
 
+    <div class="tabs">
+        <button class="tab active" data-tab="home">Início</button>
+        <button class="tab" data-tab="invoice">Nota Fiscal</button>
+        <button class="tab" data-tab="about">Sobre</button>
+    </div>
+
+    <div class="content">
+        <div class="tab-content active" id="home">
+            <div class="info-card">
+                <h3>🚀 Automação Ativa</h3>
+                <p>A extensão está monitorando automaticamente as páginas do VarejoFacil para capturar códigos de produtos e copiar preços de custo.</p>
+            </div>
+            <div class="info-card">
+                <h3>📋 Como Usar - Consulta Automática</h3>
+                <p>1. Navegue até uma nota fiscal de venda<br>
+                2. Digite o código do produto e pressione Enter<br>
+                3. Digite o código da loja e pressione Enter<br>
+                4. O preço de custo será copiado automaticamente</p>
+            </div>
+        </div>
+
+        <div class="tab-content" id="invoice">
+            <div class="form-group">
+                <label for="invoiceType">Tipo de Nota Fiscal</label>
+                <select id="invoiceType">
+                    <option value="compra">Nota de Compra</option>
+                    <option value="venda">Nota de Venda</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="invoiceNumber">Número da Nota Fiscal</label>
+                <input type="text" id="invoiceNumber" placeholder="Ex: 158380">
+            </div>
+            <button class="btn" id="searchInvoice">Consultar Nota Fiscal</button>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div>Consultando nota fiscal...</div>
+            </div>
+            
+            <div class="result" id="result"></div>
+
+            <div class="notes-list" id="notesList" style="display: none;">
+                <h4>Notas Encontradas:</h4>
+                <div id="notesContainer"></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="about">
+            <div class="info-card">
+                <h3>📦 VarejoFacil Tools v1.0</h3>
+                <p>Extensão para automação de consultas de preços na plataforma VarejoFacil.</p>
+            </div>
+            <div class="info-card">
+                <h3>🔧 Funcionalidades</h3>
+                <p>• Detecção automática de páginas<br>
+                • Consulta de preços de produtos<br>
+                • Cópia automática para área de transferência<br>
+                • Consulta e download de notas fiscais</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
 </body>
-
 </html>

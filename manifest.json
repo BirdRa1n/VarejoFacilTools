@@ -7,13 +7,19 @@
         "tabs",
         "activeTab",
         "scripting",
-        "clipboardWrite"
+        "clipboardWrite",
+        "storage",
+        "downloads"
     ],
     "host_permissions": [
         "https://*.varejofacil.com/*"
     ],
     "background": {
         "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "VarejoFacil Tools"
     },
     "icons": {
         "16": "icons/icon16.png",

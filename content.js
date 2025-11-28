@@ -1,4 +1,7 @@
 (function () {
+    console.log('🚀 VarejoFacilTools: Content script iniciado');
+    console.log('🔗 URL atual:', window.location.href);
+    
     let inputProduto = null;
     let inputLoja = null;
     let valoresArmazenados = {};
@@ -12,6 +15,7 @@
 
     function findInputsInIframes() {
         const iframes = document.querySelectorAll("iframe");
+        console.log(`🔍 Encontrados ${iframes.length} iframes na página`);
 
         for (let iframe of iframes) {
             try {
@@ -21,13 +25,13 @@
 
                 if (foundProduto && !inputProduto) {
                     inputProduto = foundProduto;
-                    console.log("✅ Input #codigoDoProduto encontrado.");
+                    console.log("✅ Input #codigoDoProduto encontrado no iframe:", iframe.src || 'sem src');
                     monitorEnterKey(inputProduto, "codigoDoProduto");
                 }
 
                 if (foundLoja && !inputLoja) {
                     inputLoja = foundLoja;
-                    console.log("✅ Input #codigoDaLojaDaNota encontrado.");
+                    console.log("✅ Input #codigoDaLojaDaNota encontrado no iframe:", iframe.src || 'sem src');
                     monitorEnterKey(inputLoja, "codigoDaLojaDaNota");
                 }
 
@@ -37,11 +41,15 @@
                     return;
                 }
             } catch (error) {
-                console.error("⚠ Erro ao acessar iframe (possível restrição de CORS):", error);
+                console.error("⚠ Erro ao acessar iframe:", iframe.src || 'sem src', error.message);
             }
         }
 
-        console.warn("❌ Inputs ainda não encontrados. Tentando novamente...");
+        if (iframes.length === 0) {
+            console.warn("❌ Nenhum iframe encontrado na página");
+        } else {
+            console.warn("❌ Inputs ainda não encontrados nos iframes. Tentando novamente...");
+        }
     }
 
     function monitorEnterKey(input, key) {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste VarejoFacilTools</title>
+</head>
+<body>
+    <h1>Teste da Extensão VarejoFacilTools</h1>
+    
+    <h2>Instruções para Teste:</h2>
+    <ol>
+        <li>Carregue a extensão no Chrome (chrome://extensions/)</li>
+        <li>Acesse uma página do VarejoFacil</li>
+        <li>Abra o popup da extensão</li>
+        <li>Vá para a aba "Nota Fiscal"</li>
+        <li>Digite um número de nota fiscal</li>
+        <li>Clique em "Consultar Nota Fiscal"</li>
+    </ol>
+    
+    <h2>Mudanças Implementadas:</h2>
+    <ul>
+        <li>✅ Adicionada permissão "storage" no manifest.json</li>
+        <li>✅ Requisições movidas para background.js (resolve CORS)</li>
+        <li>✅ Verificação de login melhorada</li>
+        <li>✅ Handlers para busca e download de notas fiscais</li>
+        <li>✅ Comunicação entre popup e background via chrome.runtime.sendMessage</li>
+    </ul>
+    
+    <h2>Endpoints Implementados:</h2>
+    <ul>
+        <li><strong>Busca de Notas de Venda:</strong><br>
+        /notaFiscalVenda/pesquisar</li>
+        <li><strong>Busca de Notas de Compra:</strong><br>
+        /notaFiscalCompra/pesquisa</li>
+        <li><strong>Download de PDF:</strong><br>
+        /notaFiscalVenda/danfe</li>
+        <li><strong>Verificação de Login:</strong><br>
+        /api/v1/eumesmo</li>
+    </ul>
+</body>
+</html>
