@@ -5,13 +5,12 @@ function checkUrlAndInjectScript(tabId, changeInfo, tab) {
     
     console.log('🔍 Verificando URL:', tab.url);
     
-    // Pattern mais flexível para capturar páginas do VarejoFacil
     const urlPattern = /^https:\/\/[a-zA-Z0-9.-]+\.varejofacil\.com\/.*notaFiscalVenda.*index/;
+    const productPattern = /^https:\/\/[a-zA-Z0-9.-]+\.varejofacil\.com\/.*[?#&]r=%2Fproduto%2Fcadastro/;
     
     if (tab.url && urlPattern.test(tab.url)) {
         console.log('✅ URL corresponde ao pattern, injetando script...');
         
-        // Salva o subdomínio
         const hostname = new URL(tab.url).hostname;
         const subdomain = hostname.split('.')[0];
         chrome.storage.local.set({ 'varejofacil_subdomain': subdomain });
@@ -23,6 +22,17 @@ function checkUrlAndInjectScript(tabId, changeInfo, tab) {
             console.log("✅ Script injetado na página:", tab.url);
         }).catch(err => {
             console.error("❌ Erro ao injetar o script:", err);
+        });
+    } else if (tab.url && productPattern.test(tab.url)) {
+        console.log('✅ Página de produto detectada, injetando image loader...');
+        
+        chrome.scripting.executeScript({
+            target: { tabId: tabId, allFrames: true },
+            files: ["product-image-loader.js"]
+        }).then(() => {
+            console.log("✅ Image loader injetado na página:", tab.url);
+        }).catch(err => {
+            console.error("❌ Erro ao injetar image loader:", err);
         });
     } else {
         console.log('❌ URL não corresponde ao pattern');
