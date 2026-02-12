@@ -5,6 +5,7 @@
     console.log('🚀 Product Image Loader iniciado');
 
     const IMAGE_SOURCES = [
+        (ean) => `https://stockeasy.birdra1n.com/api/image/product?ean=${ean}`,
         (ean) => `https://cdn-cosmos.bluesoft.com.br/products/${ean.slice(1)}`,
         (ean) => `http://www.dataload.com.br:9000/api/gtin/${ean.slice(1)}`
     ];
@@ -12,7 +13,7 @@
     function getEANCodes() {
         const eanCodes = [];
         const rows = document.querySelectorAll('#gridProdutoAux tbody tr:not(.jqgfirstrow)');
-        
+
         console.log(`📊 Encontradas ${rows.length} linhas na tabela`);
 
         rows.forEach(row => {
@@ -40,7 +41,7 @@
     async function loadExternalImage() {
         const imgElement = document.getElementById('imgProduto');
         console.log('🖼️ Elemento imgProduto:', imgElement ? 'encontrado' : 'NÃO encontrado');
-        
+
         if (!imgElement) return;
 
         const eanCodes = getEANCodes();
